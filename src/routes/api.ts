@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import express, { Router } from 'express';
 import jetValidator from 'jet-validator';
 
 import Paths from '../common/Paths';
@@ -14,7 +14,16 @@ const apiRouter = Router(),
 
 // ** Add UserRouter ** //
 
-const userRouter = Router();
+const userRouter = express.Router();
+
+userRouter.get(
+  Paths.Users.GetAll,
+  
+  
+);
+
+
+
 
 
 // **** Export default **** //

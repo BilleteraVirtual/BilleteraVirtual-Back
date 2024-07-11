@@ -5,16 +5,19 @@
 
 export default {
   Base: '/',
+  Home: '/home',
   Users: {
     Base: '/users',
-    Get: '/all',
+    GetOne: '/:dni',
+    GetAll: '/all',
     Add: '/add',
     Update: '/update',
-    Delete: '/delete/:id',
+    Delete: '/delete/:dni',
   },
   Transactions: {
     Base: '/transactions',
-    Get: '/all',
+    GetOne: '/:id',
+    GetAll: '/all',
     Add: '/add',
     Update: '/update',
     Delete: '/delete/:id',
