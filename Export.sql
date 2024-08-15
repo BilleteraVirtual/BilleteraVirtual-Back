@@ -50,7 +50,7 @@ CREATE TABLE `Empresa` (
   `RazonSocial` varchar(45) DEFAULT NULL,
   `Categoria_idCategoria` int NOT NULL,
   `Entidad_CVU` int NOT NULL,
-  PRIMARY KEY (`idEmpresa`,`Categoria_idCategoria`,`Entidad_CVU`),
+  PRIMARY KEY (`idEmpresa`),
   KEY `fk_Empresa_Categoria2_idx` (`Categoria_idCategoria`),
   KEY `fk_Empresa_Entidad1_idx` (`Entidad_CVU`),
   CONSTRAINT `fk_Empresa_Categoria2` FOREIGN KEY (`Categoria_idCategoria`) REFERENCES `Categoria` (`idCategoria`),
@@ -79,7 +79,8 @@ CREATE TABLE `Entidad` (
   `Alias` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `Saldo` double DEFAULT NULL,
   `Mail` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`CVU`)
+  PRIMARY KEY (`CVU`),
+  UNIQUE KEY `Alias` (`Alias`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -101,11 +102,10 @@ DROP TABLE IF EXISTS `Reserva`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Reserva` (
   `idReserva` int NOT NULL,
-  `DNIUsuario` int DEFAULT NULL,
   `Motivo` varchar(45) DEFAULT NULL,
   `Monto` double DEFAULT NULL,
   `Entidad_CVU` int NOT NULL,
-  PRIMARY KEY (`idReserva`,`Entidad_CVU`),
+  PRIMARY KEY (`idReserva`),
   KEY `fk_Reserva_Entidad1_idx` (`Entidad_CVU`),
   CONSTRAINT `fk_Reserva_Entidad1` FOREIGN KEY (`Entidad_CVU`) REFERENCES `Entidad` (`CVU`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -129,13 +129,13 @@ DROP TABLE IF EXISTS `Transaccion`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Transaccion` (
   `idTransaccion` int NOT NULL,
-  `Monto` varchar(45) DEFAULT NULL,
+  `Monto` float DEFAULT NULL,
   `Motivo` varchar(45) DEFAULT NULL,
   `Fecha` datetime DEFAULT NULL,
   `Categoria_idCategoria` int NOT NULL,
   `Emisor_CVU` int NOT NULL,
   `Destinatario_CVU` int NOT NULL,
-  PRIMARY KEY (`idTransaccion`,`Categoria_idCategoria`,`Emisor_CVU`,`Destinatario_CVU`),
+  PRIMARY KEY (`idTransaccion`),
   KEY `fk_Transaccion_Categoria1_idx` (`Categoria_idCategoria`),
   KEY `fk_Transaccion_Entidad1_idx` (`Emisor_CVU`),
   KEY `fk_Transaccion_Entidad2_idx` (`Destinatario_CVU`),
@@ -164,9 +164,9 @@ DROP TABLE IF EXISTS `Usuario`;
 CREATE TABLE `Usuario` (
   `DNI` int NOT NULL,
   `Nombre` varchar(45) DEFAULT NULL,
-  `Usuariocol` varchar(45) DEFAULT NULL,
+  `Apellido` varchar(45) DEFAULT NULL,
   `Entidad_CVU` int NOT NULL,
-  PRIMARY KEY (`DNI`,`Entidad_CVU`),
+  PRIMARY KEY (`DNI`),
   KEY `fk_Usuario_Entidad_idx` (`Entidad_CVU`),
   CONSTRAINT `fk_Usuario_Entidad` FOREIGN KEY (`Entidad_CVU`) REFERENCES `Entidad` (`CVU`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -190,4 +190,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-08-15 17:14:54
+-- Dump completed on 2024-08-15 17:29:00
