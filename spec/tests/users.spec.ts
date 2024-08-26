@@ -1,8 +1,7 @@
 describe('Users', () => {
   test('prueba', () => {
-    const expected = 1;
-    const actual = 1;
-    console.log(actual == expected);
+    const expected = "Arroz";
+    const actual = "Arroz";
     expect(actual).toBe(expected);
   })
 })
