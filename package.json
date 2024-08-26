@@ -7,7 +7,7 @@
     "lint:tests": "npx eslint --ext .ts spec/",
     "start": "node -r module-alias/register ./dist --env=production",
     "dev": "nodemon",
-    "test": "nodemon --config ./spec/nodemon.json",
+    "test": "jest",
     "test:no-reloading": "npx ts-node --files -r tsconfig-paths/register ./spec"
   },
   "nodemonConfig": {
@@ -48,6 +48,7 @@
     "@types/find": "^0.2.4",
     "@types/fs-extra": "^11.0.4",
     "@types/jasmine": "^5.1.4",
+    "@types/jest": "^29.5.12",
     "@types/jsonfile": "^6.1.4",
     "@types/morgan": "^1.9.9",
     "@types/node": "^20.14.9",
