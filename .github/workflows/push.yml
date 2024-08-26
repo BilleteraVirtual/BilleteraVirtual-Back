@@ -5,7 +5,7 @@ on:
     branches:
       - main
       - QA
-      - Dev
+      - dev
 
 env:
   REGISTRY: ghcr.io
