@@ -1,21 +1,20 @@
 import { Table, Column, Model, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
-import  Entity  from './Entity.model';
+import Entity from './Entity.model';
 
 @Table({
   tableName: 'Reserve',
-  timestamps: false, 
+  timestamps: false,
 })
 export class Reserve extends Model {
   @Column({
     primaryKey: true,
-    autoIncrement: true,
     field: 'idReserve',
     type: DataType.INTEGER,
   })
   reservationId!: number;
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.STRING(45),
     field: 'reason',
   })
   reason?: string;
@@ -29,7 +28,7 @@ export class Reserve extends Model {
   @ForeignKey(() => Entity)
   @Column({
     type: DataType.INTEGER,
-    field: 'entity_cvu',
+    field: 'entity_CVU',
   })
   entityCVU!: number;
 

@@ -1,6 +1,6 @@
-import { Table, Column, Model, DataType, ForeignKey, BelongsTo, HasOne } from 'sequelize-typescript';
-import { Category } from './Category.model';
-import  Entity  from './Entity.model';
+import { Table, Column, Model, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import Category from './Category.model';
+import Entity from './Entity.model';
 
 @Table({
   tableName: 'Company',
@@ -9,14 +9,13 @@ import  Entity  from './Entity.model';
 export class Company extends Model {
   @Column({
     primaryKey: true,
-    autoIncrement: true,
     field: 'idCompany',
     type: DataType.INTEGER,
   })
   companyId!: number;
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.STRING(45),
     field: 'companyName',
   })
   companyName?: string;
@@ -31,14 +30,14 @@ export class Company extends Model {
   @ForeignKey(() => Entity)
   @Column({
     type: DataType.INTEGER,
-    field: 'entity_cvu',
+    field: 'entity_CVU',
   })
   entityCVU!: number;
 
   @BelongsTo(() => Category)
   category!: Category;
 
-  @HasOne(() => Entity, 'entity_cvu')
+  @BelongsTo(() => Entity)
   entity!: Entity;
 }
 
