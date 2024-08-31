@@ -3,24 +3,24 @@ import Entity from './Entity.model';
 
 @Table({
   tableName: 'User',
-  timestamps: false, 
+  timestamps: false,
 })
 export class User extends Model {
   @Column({
     primaryKey: true,
-    field: 'dni',
+    field: 'DNI',
     type: DataType.INTEGER,
   })
-  DNI!: number;
+  dni!: number;
 
   @Column({
-    type: DataType.STRING,
-    field: 'name',
+    type: DataType.STRING(45),
+    field: 'firstName',
   })
   firstName?: string;
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.STRING(45),
     field: 'lastName',
   })
   lastName?: string;
@@ -28,11 +28,12 @@ export class User extends Model {
   @ForeignKey(() => Entity)
   @Column({
     type: DataType.INTEGER,
-    field: 'entity_cvu',
+    field: 'entity_CVU',
   })
-  entity_cvu!: number;
+  entityCVU!: number;
 
-  
+  @BelongsTo(() => Entity)
+  entity!: Entity;
 }
 
 export default User;

@@ -1,4 +1,6 @@
-import { Table, Column, Model, DataType } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, HasMany } from 'sequelize-typescript';
+import Transaction from './Transaction.model';
+import Company from './Company.model';
 
 @Table({
   tableName: 'Category',
@@ -7,17 +9,22 @@ import { Table, Column, Model, DataType } from 'sequelize-typescript';
 export class Category extends Model {
   @Column({
     primaryKey: true,
-    autoIncrement: true,
     field: 'idCategory',
     type: DataType.INTEGER,
   })
   categoryId!: number;
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.STRING(45),
     field: 'type',
   })
   type?: string;
+
+  @HasMany(() => Transaction)
+  transactions!: Transaction[];
+
+  @HasMany(() => Company)
+  companies!: Company[];
 }
 
 export default Category;

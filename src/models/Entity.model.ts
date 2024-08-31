@@ -1,23 +1,26 @@
-import { Table, Column, Model, DataType } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, HasMany, HasOne } from 'sequelize-typescript';
+import Transaction from './Transaction.model';
+import Company from './Company.model';
+import User from './User.model';
+import { Reserve } from './Reserve.model';
 
 @Table({
   tableName: 'Entity',
   timestamps: false,
 })
-class Entity extends Model {
+export class Entity extends Model {
   @Column({
     primaryKey: true,
-    field: 'cvu',
+    field: 'CVU',
     type: DataType.INTEGER,
-  })    
+  })
   CVU!: number;
 
-
   @Column({
-    type: DataType.STRING,
+    type: DataType.STRING(20),
     field: 'alias',
   })
-  alias: string;
+  alias?: string;
 
   @Column({
     type: DataType.DOUBLE,
@@ -26,10 +29,25 @@ class Entity extends Model {
   balance?: number;
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.STRING(45),
     field: 'email',
   })
-  email: string;
+  email?: string;
+
+  @HasMany(() => Transaction, 'senderCVU')
+  sentTransactions!: Transaction[];
+
+  @HasMany(() => Transaction, 'recipientCVU')
+  receivedTransactions!: Transaction[];
+
+  @HasOne(() => User)
+  user!: User;
+
+  @HasMany(() => Reserve)
+  reserve!: Reserve[];
+
+  @HasOne(() => Company)
+  company!: Company;
 }
 
 export default Entity;

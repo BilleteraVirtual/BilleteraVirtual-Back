@@ -1,10 +1,10 @@
 import { Table, Column, Model, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
-import { Category } from './Category.model';
+import Category from './Category.model';
 import Entity from './Entity.model';
 
 @Table({
-  tableName: 'Transaccion',
-  timestamps: false, 
+  tableName: 'Transaction',
+  timestamps: false,
 })
 export class Transaction extends Model {
   @Column({
@@ -43,14 +43,14 @@ export class Transaction extends Model {
   @ForeignKey(() => Entity)
   @Column({
     type: DataType.INTEGER,
-    field: 'sender_cvu',
+    field: 'sender_CVU',
   })
   senderCVU!: number;
 
   @ForeignKey(() => Entity)
   @Column({
     type: DataType.INTEGER,
-    field: 'recipient_cvu',
+    field: 'recipient_CVU',
   })
   recipientCVU!: number;
 
