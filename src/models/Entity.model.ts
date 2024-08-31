@@ -2,7 +2,7 @@ import { Table, Column, Model, DataType } from 'sequelize-typescript';
 
 @Table({
   tableName: 'Entity',
-  timestamps: false, // Si no usas createdAt y updatedAt, puedes desactivarlo
+  timestamps: false,
 })
 class Entity extends Model {
   @Column({

@@ -4,7 +4,7 @@ import  Entity  from './Entity.model';
 
 @Table({
   tableName: 'Company',
-  timestamps: false, // Si no usas createdAt y updatedAt, puedes desactivarlo
+  timestamps: false,
 })
 export class Company extends Model {
   @Column({
@@ -17,14 +17,14 @@ export class Company extends Model {
 
   @Column({
     type: DataType.STRING,
-    field: 'businessName',
+    field: 'companyName',
   })
-  businessName?: string;
+  companyName?: string;
 
   @ForeignKey(() => Category)
   @Column({
     type: DataType.INTEGER,
-    field: 'categoria_idCategory',
+    field: 'category_idCategory',
   })
   categoryId!: number;
 

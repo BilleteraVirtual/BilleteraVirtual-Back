@@ -4,7 +4,7 @@ import User from '@src/models/User.model';
 import Category from '@src/models/Category.model';
 import Entity from '@src/models/Entity.model';
 import Company from '@src/models/Company.model';
-import Reservation from '@src/models/Reservation.model';
+import Reserve from '@src/models/Reserve.model';
 import Transaction from '@src/models/Transaction.model';
 // Importa todos tus modelos aquí
 
@@ -18,7 +18,7 @@ const sequelize = new Sequelize({
   host: process.env.DB_HOST,
   port: parseInt(process.env.DB_PORT as string),
   logging: console.log,
-  models: [User, Category, Entity, Company, Reservation, Transaction], 
+  models: [User, Category, Entity, Company, Reserve, Transaction], 
 });
 
 // Authenticate the connection

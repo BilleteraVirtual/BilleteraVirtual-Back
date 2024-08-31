@@ -4,7 +4,7 @@ import Entity from './Entity.model';
 
 @Table({
   tableName: 'Transaccion',
-  timestamps: false, // Si no usas createdAt y updatedAt, puedes desactivarlo
+  timestamps: false, 
 })
 export class Transaction extends Model {
   @Column({

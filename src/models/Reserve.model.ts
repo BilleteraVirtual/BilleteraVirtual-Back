@@ -2,14 +2,14 @@ import { Table, Column, Model, DataType, ForeignKey, BelongsTo } from 'sequelize
 import  Entity  from './Entity.model';
 
 @Table({
-  tableName: 'Reservation',
-  timestamps: false, // Si no usas createdAt y updatedAt, puedes desactivarlo
+  tableName: 'Reserve',
+  timestamps: false, 
 })
-export class Reservation extends Model {
+export class Reserve extends Model {
   @Column({
     primaryKey: true,
     autoIncrement: true,
-    field: 'idReservation',
+    field: 'idReserve',
     type: DataType.INTEGER,
   })
   reservationId!: number;
@@ -37,4 +37,4 @@ export class Reservation extends Model {
   entity!: Entity;
 }
 
-export default Reservation;
+export default Reserve;

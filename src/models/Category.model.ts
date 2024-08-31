@@ -2,7 +2,7 @@ import { Table, Column, Model, DataType } from 'sequelize-typescript';
 
 @Table({
   tableName: 'Category',
-  timestamps: false, // Si no usas createdAt y updatedAt, puedes desactivarlo
+  timestamps: false,
 })
 export class Category extends Model {
   @Column({

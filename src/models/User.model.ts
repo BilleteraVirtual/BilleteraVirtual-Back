@@ -3,7 +3,7 @@ import Entity from './Entity.model';
 
 @Table({
   tableName: 'User',
-  timestamps: false, // Si no usas createdAt y updatedAt, puedes desactivarlo
+  timestamps: false, 
 })
 export class User extends Model {
   @Column({
