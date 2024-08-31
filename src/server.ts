@@ -20,6 +20,8 @@ import RouteError from '@src/common/RouteError';
 import { NodeEnvs } from '@src/common/misc';
 
 
+import "./sql/connection"
+
 // **** Variables **** //
 
 const app = express();
