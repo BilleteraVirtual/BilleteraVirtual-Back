@@ -3,11 +3,13 @@ import Paths from '../common/Paths';
 import UserRoutes from './UserRoutes';
 import EntityRoutes from './EntityRoutes';
 import ReserveRoutes from './ReserveRoutes';
+import CompanyRoutes from './CompanyRoutes';
 
 // Create individual routers for users and entities
 const userRouter = Router();
 const entityRouter = Router();
 const reserveRouter = Router();
+const companyRouter = Router();
 
 /** 
   * ! Preguntar si hay que separar api.ts en dos archivos, uno para modelo
@@ -93,6 +95,33 @@ reserveRouter.delete(
   ReserveRoutes.deleteReserve
 );
 
+// Define routes for companies
+
+companyRouter.get(
+  Paths.Companies.GetAll,
+  CompanyRoutes.getAllCompanies
+);
+
+companyRouter.get(
+  Paths.Companies.GetOne,
+  CompanyRoutes.getCompany
+);
+
+companyRouter.post(
+  Paths.Companies.Add,
+  CompanyRoutes.addCompany
+);
+
+companyRouter.put(
+  Paths.Companies.Update,
+  CompanyRoutes.updateCompany
+);
+
+companyRouter.delete(
+  Paths.Companies.Delete,
+  CompanyRoutes.deleteCompany
+);
+
 
 // Create main API router
 const apiRouter = Router();
@@ -101,6 +130,7 @@ const apiRouter = Router();
 apiRouter.use(Paths.Users.Base, userRouter);
 apiRouter.use(Paths.Entities.Base, entityRouter);
 apiRouter.use(Paths.Reserves.Base, reserveRouter);
+apiRouter.use(Paths.Companies.Base, companyRouter);
 
 
 export default apiRouter;
