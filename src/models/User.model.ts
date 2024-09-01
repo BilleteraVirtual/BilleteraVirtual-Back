@@ -11,7 +11,7 @@ export class User extends Model {
     field: 'DNI',
     type: DataType.INTEGER,
   })
-  dni!: number;
+  DNI!: number;
 
   @Column({
     type: DataType.STRING(45),
