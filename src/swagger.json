@@ -1,0 +1,303 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "API Documentation",
+      "version": "1.0.0",
+      "description": "API documentation for your application."
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000",
+        "description": "Local server"
+      }
+    ],
+    "paths": {
+      "/entities/all": {
+        "get": {
+          "summary": "Get all entities",
+          "tags": ["Entities"],
+          "responses": {
+            "200": {
+              "description": "A list of entities",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Entity"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/entities/{cvu}": {
+        "get": {
+          "summary": "Get one entity by CVU",
+          "tags": ["Entities"],
+          "parameters": [
+            {
+              "name": "CVU",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Entity data",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Entity"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "put": {
+          "summary": "Update entity by CVU",
+          "tags": ["Entities"],
+          "parameters": [
+            {
+              "name": "CVU",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "requestBody": {
+            "description": "Entity data to update",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Entity"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Updated entity data"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete entity by CVU",
+          "tags": ["Entities"],
+          "parameters": [
+            {
+              "name": "CVU",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Entity deleted"
+            }
+          }
+        }
+      },
+      "/entities/add": {
+        "post": {
+          "summary": "Add a new entity",
+          "tags": ["Entities"],
+          "requestBody": {
+            "description": "Entity to add",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Entity"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Entity added"
+            }
+          }
+        }
+      },
+      "/users/all": {
+        "get": {
+          "summary": "Get all users",
+          "tags": ["Users"],
+          "responses": {
+            "200": {
+              "description": "A list of users",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/User"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/users/{dni}": {
+        "get": {
+          "summary": "Get one user by DNI",
+          "tags": ["Users"],
+          "parameters": [
+            {
+              "name": "DNI",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "User data",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "put": {
+          "summary": "Update user by DNI",
+          "tags": ["Users"],
+          "parameters": [
+            {
+              "name": "DNI",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "requestBody": {
+            "description": "User data to update",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Updated user data"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete user by DNI",
+          "tags": ["Users"],
+          "parameters": [
+            {
+              "name": "DNI",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "User deleted"
+            }
+          }
+        }
+      },
+      "/users/add": {
+        "post": {
+          "summary": "Add a new user",
+          "tags": ["Users"],
+          "requestBody": {
+            "description": "User to add",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "User added"
+            }
+          }
+        }
+      }
+      
+    },
+    "components": {
+      "schemas": {
+        "Entity": {
+          "type": "object",
+          "properties": {
+            "CVU": {
+                "type": "integer",
+                "example": 12345678
+            },
+            "alias": {
+                "type": "string",
+                "example": "Sample Entity"
+            },
+            "balance": {
+                "type": "double",
+                "example": 500.00
+            },
+            "email": {
+                "type": "string",
+                "example": "sample@gmail.com"
+              }
+            
+          }
+        },
+        "User": {
+          "type": "object",
+          "properties": {
+            "DNI": {
+              "type": "integer",
+              "example": 23456789
+            },
+            "firstName": {
+              "type": "string",
+              "example": "Sample"
+            },
+            "lastName": {
+              "type": "string",
+              "example": "Sampi"
+            },
+            "entityCVU": {
+              "type": "integer",
+              "example": 12345678
+            }
+            
+          }
+        }
+
+      }
+    }
+  }
+  
