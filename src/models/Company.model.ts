@@ -1,6 +1,7 @@
 import { Table, Column, Model, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import Category from './Category.model';
 import Entity from './Entity.model';
+import { on } from 'events';
 
 @Table({
   tableName: 'Company',
@@ -37,7 +38,10 @@ export class Company extends Model {
   @BelongsTo(() => Category)
   category!: Category;
 
-  @BelongsTo(() => Entity)
+  @BelongsTo(() => Entity, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   entity!: Entity;
 }
 

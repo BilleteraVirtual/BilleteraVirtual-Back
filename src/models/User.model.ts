@@ -1,5 +1,6 @@
 import { Table, Column, Model, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import Entity from './Entity.model';
+import { on } from 'events';
 
 @Table({
   tableName: 'User',
@@ -32,7 +33,10 @@ export class User extends Model {
   })
   entityCVU!: number;
 
-  @BelongsTo(() => Entity)
+  @BelongsTo(() => Entity, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   entity!: Entity;
 }
 

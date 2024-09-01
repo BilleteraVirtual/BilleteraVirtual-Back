@@ -32,7 +32,10 @@ export class Reserve extends Model {
   })
   entityCVU!: number;
 
-  @BelongsTo(() => Entity)
+  @BelongsTo(() => Entity, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   entity!: Entity;
 }
 
