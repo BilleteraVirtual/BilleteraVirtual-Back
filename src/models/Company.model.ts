@@ -13,13 +13,13 @@ export class Company extends Model {
     field: 'idCompany',
     type: DataType.INTEGER,
   })
-  companyId!: number;
+  idCompany!: number;
 
   @Column({
     type: DataType.STRING(45),
-    field: 'companyName',
+    field: 'businessName',
   })
-  companyName?: string;
+  businessName?: string;
 
   @ForeignKey(() => Category)
   @Column({

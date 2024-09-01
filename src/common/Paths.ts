@@ -9,6 +9,14 @@ import Reserve from "@src/models/Reserve.model";
 export default {
   Base: '/',
   Home: '/home',
+  Entities: {
+    Base: '/entities',
+    GetOne: '/:cvu',
+    GetAll: '/all',
+    Add: '/add',
+    Update: '/update/:cvu',
+    Delete: '/delete/:cvu',
+  },
   Users: {
     Base: '/users',
     GetOne: '/:dni',
@@ -16,6 +24,14 @@ export default {
     Add: '/add',
     Update: '/update/:dni',
     Delete: '/delete/:dni',
+  },
+  Companies: {
+    Base: '/companies',
+    GetOne: '/:id',
+    GetAll: '/all',
+    Add: '/add',
+    Update: '/update/:id',
+    Delete: '/delete/:id',
   },
   Transactions: {
     Base: '/transactions',
@@ -25,16 +41,16 @@ export default {
     Update: '/update/:id',
     Delete: '/delete/:id',
   },
-  Entities: {
-    Base: '/entities',
-    GetOne: '/:cvu',
-    GetAll: '/all',
-    Add: '/add',
-    Update: '/update/:cvu',
-    Delete: '/delete/:cvu',
-  },
   Reserves: {
     Base: '/reserves',
+    GetOne: '/:id',
+    GetAll: '/all',
+    Add: '/add',
+    Update: '/update/:id',
+    Delete: '/delete/:id',
+  },
+  Categories: {
+    Base: '/categories',
     GetOne: '/:id',
     GetAll: '/all',
     Add: '/add',

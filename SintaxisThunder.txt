@@ -38,7 +38,7 @@ company:
 
 {
   "idCompany": 1,
-  "companyName": "Tech Solutions",
+  "businessName": "Tech Solutions",
   "categoryId": 1,
   "entityCVU": 12345678
 }
