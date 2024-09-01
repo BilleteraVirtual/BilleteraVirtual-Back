@@ -8,10 +8,10 @@ import Entity from './Entity.model';
 export class Reserve extends Model {
   @Column({
     primaryKey: true,
-    field: 'idReserve',
+    field: 'reserveId',
     type: DataType.INTEGER,
   })
-  reservationId!: number;
+  reserveId!: number;
 
   @Column({
     type: DataType.STRING(45),

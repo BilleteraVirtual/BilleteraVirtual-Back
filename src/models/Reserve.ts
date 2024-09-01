@@ -8,7 +8,7 @@ const INVALID_CONSTRUCTOR_PARAM = 'nameOrObj arg must a string or an object ' +
 
 
 export interface IReserve {
-  reservationId: number;
+  reserveId: number;
   reason: string;
   amount: number;
   entityCVU: number;

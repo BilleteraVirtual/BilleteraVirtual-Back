@@ -2,6 +2,9 @@
  * Express router paths go here.
  */
 
+import Reserve from "@src/models/Reserve.model";
+
+
 
 export default {
   Base: '/',
@@ -11,7 +14,7 @@ export default {
     GetOne: '/:dni',
     GetAll: '/all',
     Add: '/add',
-    Update: '/update',
+    Update: '/update/:dni',
     Delete: '/delete/:dni',
   },
   Transactions: {
@@ -19,15 +22,24 @@ export default {
     GetOne: '/:id',
     GetAll: '/all',
     Add: '/add',
-    Update: '/update',
+    Update: '/update/:id',
     Delete: '/delete/:id',
-  }
-  /**
-   * ?  Revisar esto
-  Audit: {
-    Base: '/audit',
-    Get: '/all',
   },
-  */
+  Entities: {
+    Base: '/entities',
+    GetOne: '/:cvu',
+    GetAll: '/all',
+    Add: '/add',
+    Update: '/update/:cvu',
+    Delete: '/delete/:cvu',
+  },
+  Reserves: {
+    Base: '/reserves',
+    GetOne: '/:id',
+    GetAll: '/all',
+    Add: '/add',
+    Update: '/update/:id',
+    Delete: '/delete/:id',
+  },
 
 } as const;
