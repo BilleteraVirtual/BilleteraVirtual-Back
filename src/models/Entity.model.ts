@@ -3,6 +3,7 @@ import Transaction from './Transaction.model';
 import Company from './Company.model';
 import User from './User.model';
 import { Reserve } from './Reserve.model';
+import { on } from 'events';
 
 @Table({
   tableName: 'Entity',
@@ -40,13 +41,22 @@ export class Entity extends Model {
   @HasMany(() => Transaction, 'recipientCVU')
   receivedTransactions!: Transaction[];
 
-  @HasOne(() => User)
+  @HasOne(() => User, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   user!: User;
 
-  @HasMany(() => Reserve)
+  @HasMany(() => Reserve, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   reserve!: Reserve[];
 
-  @HasOne(() => Company)
+  @HasOne(() => Company,{
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   company!: Company;
 }
 

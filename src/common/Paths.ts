@@ -2,6 +2,8 @@
  * Express router paths go here.
  */
 
+import Reserve from "@src/models/Reserve.model";
+
 
 
 export default {
@@ -30,6 +32,14 @@ export default {
     Add: '/add',
     Update: '/update/:cvu',
     Delete: '/delete/:cvu',
-  }
+  },
+  Reserves: {
+    Base: '/reserves',
+    GetOne: '/:id',
+    GetAll: '/all',
+    Add: '/add',
+    Update: '/update/:id',
+    Delete: '/delete/:id',
+  },
 
 } as const;

@@ -4,7 +4,7 @@ user:
   "DNI": 12345678,
   "firstName": "John",
   "lastName": "Smith",
-  "entity_CVU": 98765432
+  "entityCVU": 98765432
 }
 
 transaction:
@@ -40,7 +40,7 @@ company:
   "idCompany": 1,
   "companyName": "Tech Solutions",
   "categoryId": 1,
-  "entity_CVU": 12345678
+  "entityCVU": 12345678
 }
 
 reserve:
@@ -49,7 +49,7 @@ reserve:
   "idReserve": 1,
   "reason": "Reservation for conference room",
   "amount": 200.00,
-  "entity_CVU": 12345678
+  "entityCVU": 12345678
 }
 
 
