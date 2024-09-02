@@ -1,4 +1,4 @@
-import { Table, Column, Model, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, ForeignKey, BelongsTo, AllowNull } from 'sequelize-typescript';
 import Category from './Category.model';
 import Entity from './Entity.model';
 import { on } from 'events';
@@ -22,6 +22,7 @@ export class Company extends Model {
   businessName?: string;
 
   @ForeignKey(() => Category)
+  @AllowNull(false)
   @Column({
     type: DataType.INTEGER,
     field: 'category_idCategory',
@@ -29,9 +30,10 @@ export class Company extends Model {
   categoryId!: number;
 
   @ForeignKey(() => Entity)
+  @AllowNull(false)
   @Column({
     type: DataType.INTEGER,
-    field: 'entity_CVU',
+    field: 'entityCVU',
   })
   entityCVU!: number;
 

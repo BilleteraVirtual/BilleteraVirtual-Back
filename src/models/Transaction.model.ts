@@ -1,4 +1,4 @@
-import { Table, Column, Model, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, ForeignKey, BelongsTo, AllowNull } from 'sequelize-typescript';
 import Category from './Category.model';
 import Entity from './Entity.model';
 
@@ -34,6 +34,7 @@ export class Transaction extends Model {
   date?: Date;
 
   @ForeignKey(() => Category)
+  @AllowNull(false)
   @Column({
     type: DataType.INTEGER,
     field: 'category_idCategory',
@@ -41,6 +42,7 @@ export class Transaction extends Model {
   categoryId!: number;
 
   @ForeignKey(() => Entity)
+  @AllowNull(false)
   @Column({
     type: DataType.INTEGER,
     field: 'sender_CVU',
@@ -48,6 +50,7 @@ export class Transaction extends Model {
   senderCVU!: number;
 
   @ForeignKey(() => Entity)
+  @AllowNull(false)
   @Column({
     type: DataType.INTEGER,
     field: 'recipient_CVU',
