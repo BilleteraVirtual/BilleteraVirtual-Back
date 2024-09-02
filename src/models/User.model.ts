@@ -29,7 +29,7 @@ export class User extends Model {
   @ForeignKey(() => Entity)
   @Column({
     type: DataType.INTEGER,
-    field: 'entity_CVU',
+    field: 'entityCVU',
   })
   entityCVU!: number;
 

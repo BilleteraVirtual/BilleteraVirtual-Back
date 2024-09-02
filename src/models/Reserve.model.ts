@@ -1,4 +1,4 @@
-import { Table, Column, Model, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, ForeignKey, BelongsTo, AllowNull } from 'sequelize-typescript';
 import Entity from './Entity.model';
 
 @Table({
@@ -26,9 +26,10 @@ export class Reserve extends Model {
   amount?: number;
 
   @ForeignKey(() => Entity)
+  @AllowNull(false)
   @Column({
     type: DataType.INTEGER,
-    field: 'entity_CVU',
+    field: 'entityCVU',
   })
   entityCVU!: number;
 
