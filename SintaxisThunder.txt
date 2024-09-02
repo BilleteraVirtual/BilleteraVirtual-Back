@@ -53,3 +53,23 @@ reserve:
 }
 
 
+transaction :
+
+
+  {
+    "transactionId": 3,
+    "amount": 321,
+    "reason": "si",
+    "date": "2025-1-01",
+    "categoryId": 1,
+    "senderCVU": 12345678,
+    "recipientCVU": 12345678
+  }
+
+
+  category:
+
+    {
+    "categoryId": 10,
+    "type":"cosa"
+  }

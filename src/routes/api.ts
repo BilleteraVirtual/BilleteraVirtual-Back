@@ -4,13 +4,18 @@ import UserRoutes from './UserRoutes';
 import EntityRoutes from './EntityRoutes';
 import ReserveRoutes from './ReserveRoutes';
 import CompanyRoutes from './CompanyRoutes';
+import CategoryRoutes from './CategoryRoutes';
+import TransactionRoutes from './TransactionRoutes';
+
+
 
 // Create individual routers for users and entities
 const userRouter = Router();
 const entityRouter = Router();
 const reserveRouter = Router();
 const companyRouter = Router();
-
+const categoryRouter = Router();
+const transactionRouter = Router();
 /** 
   * ! Preguntar si hay que separar api.ts en dos archivos, uno para modelo
 */
@@ -122,6 +127,63 @@ companyRouter.delete(
   CompanyRoutes.deleteCompany
 );
 
+// Define routes for categories
+
+categoryRouter.get(
+  Paths.Categories.GetAll,
+  CategoryRoutes.getAllCategories
+);
+
+categoryRouter.get(
+  Paths.Categories.GetOne,
+  CategoryRoutes.getCategory
+);
+
+categoryRouter.post(
+  Paths.Categories.Add,
+  CategoryRoutes.addCategory
+);
+
+categoryRouter.put(
+  Paths.Categories.Update,
+  CategoryRoutes.updateCategory
+);
+
+categoryRouter.delete(
+  Paths.Categories.Delete,
+  CategoryRoutes.deleteCategory
+);
+
+// Define routes for transaction
+
+transactionRouter.get(
+  Paths.Transactions.GetAll,
+  TransactionRoutes.getAllTransactions
+);
+
+transactionRouter.get(
+  Paths.Transactions.GetOne,
+  TransactionRoutes.getTransaction
+);
+
+transactionRouter.post(
+  Paths.Transactions.Add,
+  TransactionRoutes.addTransaction
+);
+
+transactionRouter.put(
+  Paths.Transactions.Update,
+  TransactionRoutes.updateTransaction
+);
+
+transactionRouter.delete(
+  Paths.Transactions.Delete,
+  TransactionRoutes.deleteTransaction
+);
+
+
+
+
 
 // Create main API router
 const apiRouter = Router();
@@ -131,6 +193,8 @@ apiRouter.use(Paths.Users.Base, userRouter);
 apiRouter.use(Paths.Entities.Base, entityRouter);
 apiRouter.use(Paths.Reserves.Base, reserveRouter);
 apiRouter.use(Paths.Companies.Base, companyRouter);
+apiRouter.use(Paths.Categories.Base, categoryRouter);
+apiRouter.use(Paths.Transactions.Base, transactionRouter);
 
 
 export default apiRouter;
