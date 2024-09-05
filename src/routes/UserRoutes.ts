@@ -20,7 +20,6 @@ async function getUser(req: IReq, res: IRes){
 
 async function addUser(req: IReq<IUser>, res: IRes){
     const user = req.body;
-    console.log(user);
     await UserService.addUser(user);
     res.status(HttpStatusCodes.CREATED).send();
 }

@@ -13,5 +13,5 @@ export interface IUser {
   DNI: number;
   firstName: string;
   lastName: string;
-  entityCVU: number;
+  entityCVU: string;
 }

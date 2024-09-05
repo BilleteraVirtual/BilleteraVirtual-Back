@@ -13,9 +13,9 @@ export class Entity extends Model {
   @Column({
     primaryKey: true,
     field: 'CVU',
-    type: DataType.INTEGER,
+    type: DataType.DECIMAL(30,0),
   })
-  CVU!: number;
+  CVU!: string;
 
   @Column({
     type: DataType.STRING(20),
@@ -34,6 +34,12 @@ export class Entity extends Model {
     field: 'email',
   })
   email?: string;
+
+  @Column({
+    type: DataType.STRING(45),
+    field: 'password',
+  })
+  password?: string;
 
   @HasMany(() => Transaction, 'senderCVU')
   sentTransactions!: Transaction[];
