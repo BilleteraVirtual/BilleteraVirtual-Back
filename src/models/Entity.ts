@@ -9,9 +9,10 @@ const INVALID_CONSTRUCTOR_PARAM = 'nameOrObj arg must a string or an object ' +
   
 
 export interface IEntity {
-    CVU: number;
+    CVU: string;
     alias: string;
     balance: number;
     email: string;
+    password: string;
   }
   

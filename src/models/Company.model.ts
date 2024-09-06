@@ -32,10 +32,10 @@ export class Company extends Model {
   @ForeignKey(() => Entity)
   @AllowNull(false)
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.DECIMAL(30,0),
     field: 'entityCVU',
   })
-  entityCVU!: number;
+  entityCVU!: string;
 
   @BelongsTo(() => Category)
   category!: Category;

@@ -44,18 +44,18 @@ export class Transaction extends Model {
   @ForeignKey(() => Entity)
   @AllowNull(false)
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.DECIMAL(30,0),
     field: 'sender_CVU',
   })
-  senderCVU!: number;
+  senderCVU!: string;
 
   @ForeignKey(() => Entity)
   @AllowNull(false)
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.DECIMAL(30,0),
     field: 'recipient_CVU',
   })
-  recipientCVU!: number;
+  recipientCVU!: string;
 
   @BelongsTo(() => Category)
   category!: Category;

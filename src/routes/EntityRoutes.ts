@@ -26,7 +26,6 @@ async function addEntity(req: IReq<IEntity>, res: IRes){
 
 async function updateEntity(req: IReq<IEntity>, res: IRes){
     const entity = req.body;
-    entity.CVU = +req.params.cvu;
     await EntityService.updateEntity(entity);
     res.status(HttpStatusCodes.CREATED).send();
 }

@@ -11,5 +11,5 @@ export interface IReserve {
   reserveId: number;
   reason: string;
   amount: number;
-  entityCVU: number;
+  entityCVU: string;
 }

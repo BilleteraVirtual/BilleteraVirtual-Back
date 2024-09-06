@@ -13,7 +13,7 @@ export interface ITransaction {
     reason: string;
     date: Date;
     categoryId: number;
-    senderCVU: number;
-    recipientCVU: number;
+    senderCVU: string;
+    recipientCVU: string;
   }
   

@@ -11,6 +11,6 @@ export interface ICompany {
     idCompany: number;
     businessName?: string;
     categoryId: number;
-    entityCVU: number;
+    entityCVU: string;
   }
   
