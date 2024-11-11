@@ -36,10 +36,10 @@ export class Entity extends Model {
   email?: string;
 
   @Column({
-    type: DataType.STRING(45),
-    field: 'password',
+    type: DataType.STRING(80),
+    field: 'hash',
   })
-  password?: string;
+  hash?: string;
 
   @HasMany(() => Transaction, 'senderCVU')
   sentTransactions!: Transaction[];

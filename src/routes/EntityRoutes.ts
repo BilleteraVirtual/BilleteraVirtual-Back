@@ -36,6 +36,11 @@ async function deleteEntity(req: IReq, res: IRes){
     res.status(HttpStatusCodes.NO_CONTENT).send();
 }
 
+async function loginEntity(req: IReq, res: IRes){
+    const entity = req.body;
+    const token = await EntityService.loginEntity(entity);
+    res.status(HttpStatusCodes.OK).json(token);
+}
 // **** Export default **** //
 
 export default {
@@ -44,4 +49,5 @@ export default {
     addEntity,
     updateEntity,
     deleteEntity,
+    loginEntity,
 } as const;
