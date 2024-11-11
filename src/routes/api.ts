@@ -6,6 +6,7 @@ import ReserveRoutes from './ReserveRoutes';
 import CompanyRoutes from './CompanyRoutes';
 import CategoryRoutes from './CategoryRoutes';
 import TransactionRoutes from './TransactionRoutes';
+import checkToken from '@src/util/authMiddleware';
 
 
 
@@ -16,18 +17,18 @@ const reserveRouter = Router();
 const companyRouter = Router();
 const categoryRouter = Router();
 const transactionRouter = Router();
-/** 
-  * ! Preguntar si hay que separar api.ts en dos archivos, uno para modelo
-*/
+
 
 // Define routes for users
+
 userRouter.get(
   Paths.Users.GetAll, 
   UserRoutes.getAllUsers
 );
 
 userRouter.get(
-  Paths.Users.GetOne, 
+  Paths.Users.GetOne,
+  checkToken,
   UserRoutes.getUser
 );
 
@@ -48,13 +49,19 @@ userRouter.delete(
 
 
 // Define routes for entities
+entityRouter.post(
+  Paths.Entities.Login,
+  EntityRoutes.loginEntity
+);
+
 entityRouter.get(
   Paths.Entities.GetAll, 
   EntityRoutes.getAllEntities
 );
 
 entityRouter.get(
-  Paths.Entities.GetOne, 
+  Paths.Entities.GetOne,
+  checkToken, 
   EntityRoutes.getEntity
 );
 
@@ -64,7 +71,8 @@ entityRouter.post(
 );
 
 entityRouter.put(
-  Paths.Entities.Update, 
+  Paths.Entities.Update,
+  checkToken, 
   EntityRoutes.updateEntity
 );
 
@@ -195,6 +203,7 @@ apiRouter.use(Paths.Reserves.Base, reserveRouter);
 apiRouter.use(Paths.Companies.Base, companyRouter);
 apiRouter.use(Paths.Categories.Base, categoryRouter);
 apiRouter.use(Paths.Transactions.Base, transactionRouter);
+apiRouter.use(checkToken)
 
 
 export default apiRouter;

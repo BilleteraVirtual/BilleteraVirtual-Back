@@ -24,7 +24,8 @@ entity:
   "CVU": 12345678,
   "alias": "sample_alias",
   "balance": 500.00,
-  "email": "sample@example.com"
+  "email": "sample@example.com",
+  "password": "1234"
 }
 
 category:

@@ -9,6 +9,9 @@ import Entity from '@src/models/Entity.model';
 
 export const ENTITY_NOT_FOUND_ERR = 'Entity not found';
 
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
 
 // **** Functions **** //
 
@@ -30,8 +33,10 @@ async function getEntity(cvu: number): Promise<Entity> {
 }
 
 async function addEntity(entity: IEntity): Promise<void> {
-    const { CVU, alias, balance, email } = entity;
-    Entity.create({ CVU, alias, balance, email }).then(() => {
+    const { CVU, alias, balance, email, password } = entity;
+    const hash = bcrypt.hashSync(password, 10);
+    
+    Entity.create({ CVU, alias, balance, email, hash }).then(() => {
         return;
     });
 }
@@ -52,7 +57,33 @@ async function deleteEntity(cvu: number): Promise<void> {
         return;
     });
 }
+
+async function loginEntity(entity: any): Promise<void> {
+    const entity1 = await Entity.findOne({
+        where: { email: entity.email },
+    });
+
+    if(!entity1){
+        throw new RouteError(HttpStatusCodes.NOT_FOUND, ENTITY_NOT_FOUND_ERR);
+    }
+
+    const pass = bcrypt.compareSync(entity.password, entity1.hash);
+
+    if (!pass) {
+        throw new RouteError(HttpStatusCodes.UNAUTHORIZED, 'Invalid password');
+    }
+
+    return createToken(entity1.email);
+}
 // **** Export default **** //
+
+function createToken(email: string | undefined) { 
+    if (!email) {
+        throw new Error('Email is required to create a token');
+    } 
+    return jwt.sign({ email }, process.env.JWT_SECRET || 'default_secret', { expiresIn: '20s' });
+
+}
 
 export default {
     getAllEntities,
@@ -60,4 +91,5 @@ export default {
     addEntity,
     updateEntity,
     deleteEntity,
+    loginEntity,
 } as const;

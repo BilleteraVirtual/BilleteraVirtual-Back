@@ -11,6 +11,7 @@ export default {
   Home: '/home',
   Entities: {
     Base: '/entities',
+    Login: '/login',
     GetOne: '/:cvu',
     GetAll: '/all',
     Add: '/add',
