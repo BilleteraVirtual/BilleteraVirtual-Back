@@ -81,7 +81,7 @@ function createToken(email: string | undefined) {
     if (!email) {
         throw new Error('Email is required to create a token');
     } 
-    return jwt.sign({ email }, process.env.JWT_SECRET || 'default_secret', { expiresIn: '20s' });
+    return jwt.sign({ email }, process.env.JWT_SECRET || 'default_secret', { expiresIn: '1d' });
 
 }
 
