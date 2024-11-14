@@ -58,5 +58,9 @@ export default {
     Update: '/update/:id',
     Delete: '/delete/:id',
   },
+  Auth: {
+    Base: '/auth',
+    Verify: '/verify',
+  },
 
 } as const;

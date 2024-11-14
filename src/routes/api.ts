@@ -7,6 +7,7 @@ import CompanyRoutes from './CompanyRoutes';
 import CategoryRoutes from './CategoryRoutes';
 import TransactionRoutes from './TransactionRoutes';
 import checkToken from '@src/util/authMiddleware';
+import authRoutes from './authRoutes';
 
 
 
@@ -17,7 +18,7 @@ const reserveRouter = Router();
 const companyRouter = Router();
 const categoryRouter = Router();
 const transactionRouter = Router();
-
+const authRouter = Router();
 
 // Define routes for users
 
@@ -189,7 +190,10 @@ transactionRouter.delete(
   TransactionRoutes.deleteTransaction
 );
 
-
+authRouter.post(
+  Paths.Auth.Verify,
+  authRoutes.verifyToken
+);
 
 
 
@@ -203,6 +207,7 @@ apiRouter.use(Paths.Reserves.Base, reserveRouter);
 apiRouter.use(Paths.Companies.Base, companyRouter);
 apiRouter.use(Paths.Categories.Base, categoryRouter);
 apiRouter.use(Paths.Transactions.Base, transactionRouter);
+apiRouter.use(Paths.Auth.Base, authRouter);
 apiRouter.use(checkToken)
 
 
