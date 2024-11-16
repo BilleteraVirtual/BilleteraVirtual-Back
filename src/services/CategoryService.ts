@@ -20,7 +20,7 @@ async function getAllCategories(): Promise<Category[]> {
 
 async function getCategory(idCategory: number): Promise<Category> {
     return Category.findOne({
-        where: { categoryId: idCategory },
+        where: { idCategory: idCategory },
     }).then((category: Category | null) => {
         if (!category) {
             throw new RouteError(HttpStatusCodes.NOT_FOUND, CATEGORY_NOT_FOUND_ERR);
@@ -30,24 +30,24 @@ async function getCategory(idCategory: number): Promise<Category> {
 }
 
 async function addCategory(category: ICategory): Promise<void> {
-    const { categoryId, type } = category;
-    Category.create({ categoryId, type }).then(() => {
+    const { idCategory, type } = category;
+    Category.create({ idCategory, type }).then(() => {
         return;
     });
 }
 
 async function updateCategory(category: ICategory): Promise<void> {
-    const { categoryId, type } = category;
+    const { idCategory, type } = category;
     Category.update({ type }, {
-        where: { categoryId },
+        where: { idCategory },
     }).then(() => {
         return;
     });
 }
 
-async function deleteCategory(categoryId: number): Promise<void> {
+async function deleteCategory(idCategory: number): Promise<void> {
     Category.destroy({
-        where: { categoryId },
+        where: { idCategory },
     }).then(() => {
         return;
     });

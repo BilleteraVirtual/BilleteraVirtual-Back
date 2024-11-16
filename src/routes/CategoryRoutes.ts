@@ -27,7 +27,7 @@ async function addCategory(req: IReq<ICategory>, res: IRes){
 
 async function updateCategory(req: IReq<ICategory>, res: IRes){
     const category = req.body;
-    category.categoryId = +req.params.id;
+    category.idCategory = +req.params.id;
     await CategoryService.updateCategory(category);
     res.status(HttpStatusCodes.CREATED).send();
 }

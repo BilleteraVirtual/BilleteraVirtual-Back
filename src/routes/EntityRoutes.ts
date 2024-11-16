@@ -18,11 +18,19 @@ async function getEntity(req: IReq, res: IRes){
     res.status(HttpStatusCodes.OK).json(entity);
 }
 
-async function addEntity(req: IReq<IEntity>, res: IRes){
+async function addEntity(req: IReq<IEntity>, res: IRes) {
     const entity = req.body;
-    await EntityService.addEntity(entity);
-    res.status(HttpStatusCodes.CREATED).send();
-}
+    try {
+      const result = await EntityService.addEntity(entity);
+  
+      // Respond with a success message
+      res.status(HttpStatusCodes.CREATED).json({ success: true, message: 'Entity added successfully' });
+    } catch (error) {
+      console.error('Error adding entity:', error);
+      res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({ success: false, message: error.message });
+    }
+  }
+  
 
 async function updateEntity(req: IReq<IEntity>, res: IRes){
     const entity = req.body;

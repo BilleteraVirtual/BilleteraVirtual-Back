@@ -10,7 +10,7 @@ const INVALID_CONSTRUCTOR_PARAM = 'nameOrObj arg must a string or an object ' +
 // **** Types **** //
 
 export interface ICategory {
-    categoryId: number;
+    idCategory: number;
     type: string;
   }
   
