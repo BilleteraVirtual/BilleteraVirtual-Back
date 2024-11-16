@@ -30,15 +30,15 @@ async function getTransaction(idTransaction: number): Promise<Transaction> {
 }
 
 async function addTransaction(transaction: ITransaction): Promise<void> {
-    const { transactionId, amount, reason, date, categoryId, senderCVU, recipientCVU } = transaction;
-    Transaction.create({ transactionId, amount, reason, date, categoryId, senderCVU, recipientCVU }).then(() => {
+    const { transactionId, amount, reason, date, idCategory, senderCVU, recipientCVU } = transaction;
+    Transaction.create({ transactionId, amount, reason, date, idCategory, senderCVU, recipientCVU }).then(() => {
         return;
     });
 }
 
 async function updateTransaction(transaction: ITransaction): Promise<void> {
-    const { transactionId, amount, reason, date, categoryId, senderCVU, recipientCVU } = transaction;
-    Transaction.update({ amount, reason, date, categoryId, senderCVU, recipientCVU }, {
+    const { transactionId, amount, reason, date, idCategory, senderCVU, recipientCVU } = transaction;
+    Transaction.update({ amount, reason, date, idCategory, senderCVU, recipientCVU }, {
         where: { transactionId },
     }).then(() => {
         return;

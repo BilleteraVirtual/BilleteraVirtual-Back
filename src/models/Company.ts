@@ -10,7 +10,7 @@ const INVALID_CONSTRUCTOR_PARAM = 'nameOrObj arg must a string or an object ' +
 export interface ICompany {
     idCompany: number;
     businessName?: string;
-    categoryId: number;
+    idCategory: number;
     entityCVU: string;
   }
   

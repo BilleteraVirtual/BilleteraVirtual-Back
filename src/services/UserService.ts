@@ -18,21 +18,23 @@ async function getAllUsers(): Promise<User[]> {
     });
 }
 
-async function getUser(dni: number): Promise<User> {
+async function getUser(dni: number): Promise<User|null> {
     return User.findOne({
         where: { DNI: dni },
     }).then((user: User | null) => {
-        if (!user) {
-            throw new RouteError(HttpStatusCodes.NOT_FOUND, USER_NOT_FOUND_ERR);
-        }
         return user;
     });
 }
 
-async function addUser(user: IUser): Promise<void> {
+async function addUser(user: any): Promise<void> {
     const { DNI, firstName, lastName, entityCVU } = user;
-    User.create({ DNI, firstName, lastName, entityCVU }).then(() => {
-        return;
+
+    // Crear el usuario en la base de datos
+    await User.create({
+        DNI,
+        firstName,
+        lastName,
+        entityCVU,
     });
 }
 

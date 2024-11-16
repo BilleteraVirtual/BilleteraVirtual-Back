@@ -12,7 +12,7 @@ export class Category extends Model {
     field: 'idCategory',
     type: DataType.INTEGER,
   })
-  categoryId!: number;
+  idCategory!: number;
 
   @Column({
     type: DataType.STRING(45),

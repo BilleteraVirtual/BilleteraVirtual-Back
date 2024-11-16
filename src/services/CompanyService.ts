@@ -29,16 +29,27 @@ async function getCompany(idCompany: number): Promise<Company> {
     });
 }
 
-async function addCompany(company: ICompany): Promise<void> {
-    const { idCompany, businessName, categoryId, entityCVU } = company;
-    Company.create({ idCompany, businessName, categoryId, entityCVU }).then(() => {
-        return;
+async function getCompanyByName(businessName: string): Promise<Company|null> {
+    return Company.findOne({
+        where: { businessName: businessName },
+    })
+}
+
+async function addCompany(company: any): Promise<void> {
+    console.log(company);
+    const { businessName, idCategory, entityCVU } = company;
+console.log(idCategory)
+    // Crear la empresa en la base de datos
+    await Company.create({
+        businessName,
+        idCategory,
+        entityCVU,
     });
 }
 
 async function updateCompany(company: ICompany): Promise<void> {
-    const {  idCompany, businessName, categoryId, entityCVU } = company;
-    Company.update({  businessName, categoryId, entityCVU }, {
+    const {  idCompany, businessName, idCategory, entityCVU } = company;
+    Company.update({  businessName, idCategory, entityCVU }, {
         where: { idCompany },
     }).then(() => {
         return;
@@ -55,6 +66,7 @@ async function deleteCompany(idCompany: number): Promise<void> {
 // **** Export default **** //
 
 export default {
+    getCompanyByName,
     getAllCompanies,
     getCompany,
     addCompany,

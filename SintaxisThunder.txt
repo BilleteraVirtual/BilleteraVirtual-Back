@@ -13,7 +13,7 @@ transaction:
   "amount": 100.00,
   "reason": "Payment",
   "date": "2024-08-31T10:00:00.000Z",
-  "categoryId": 1,
+  "idCategory": 1,
   "senderCVU": 98765432,
   "recipientCVU": 87654321
 }
@@ -40,7 +40,7 @@ company:
 {
   "idCompany": 1,
   "businessName": "Tech Solutions",
-  "categoryId": 1,
+  "idCategory": 1,
   "entityCVU": 12345678
 }
 
@@ -62,7 +62,7 @@ transaction :
     "amount": 321,
     "reason": "si",
     "date": "2025-1-01",
-    "categoryId": 1,
+    "idCategory": 1,
     "senderCVU": 12345678,
     "recipientCVU": 12345678
   }
@@ -71,6 +71,6 @@ transaction :
   category:
 
     {
-    "categoryId": 10,
+    "idCategory": 10,
     "type":"cosa"
   }

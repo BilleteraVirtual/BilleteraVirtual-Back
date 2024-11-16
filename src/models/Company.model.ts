@@ -10,6 +10,7 @@ import { on } from 'events';
 export class Company extends Model {
   @Column({
     primaryKey: true,
+    autoIncrement: true,
     field: 'idCompany',
     type: DataType.INTEGER,
   })
@@ -27,7 +28,7 @@ export class Company extends Model {
     type: DataType.INTEGER,
     field: 'category_idCategory',
   })
-  categoryId!: number;
+  idCategory!: number;
 
   @ForeignKey(() => Entity)
   @AllowNull(false)

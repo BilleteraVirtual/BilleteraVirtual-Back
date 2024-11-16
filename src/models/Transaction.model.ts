@@ -39,7 +39,7 @@ export class Transaction extends Model {
     type: DataType.INTEGER,
     field: 'category_idCategory',
   })
-  categoryId!: number;
+  idCategory!: number;
 
   @ForeignKey(() => Entity)
   @AllowNull(false)
