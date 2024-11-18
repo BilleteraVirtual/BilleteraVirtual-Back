@@ -128,6 +128,34 @@ async function deleteEntity(cvu: number): Promise<void> {
     });
 }
 
+async function getEntityDetails(cvu: string, type: string): Promise<object | null> {
+    if (type === 'user') {
+        const user = await User.findOne({
+            where: { entityCVU: cvu },
+        });
+        if (!user) return null;
+
+        return {
+            firstName: user.firstName,
+            lastName: user.lastName,
+        };
+    } else if (type === 'company') {
+        const company = await Company.findOne({
+            where: { entityCVU: cvu },
+            include: [{ model: Category, attributes: ['type'] }],
+        });
+        if (!company) return null;
+
+        return {
+            businessName: company.businessName,
+            category: company.category?.type || 'No category assigned',
+        };
+    }
+    return null; 
+}
+
+
+
 async function loginEntity(entity: any): Promise<string> {
     const entityRecord = await Entity.findOne({
         where: { email: entity.email },
@@ -188,4 +216,5 @@ export default {
     updateEntity,
     deleteEntity,
     loginEntity,
+    getEntityDetails,
 } as const;

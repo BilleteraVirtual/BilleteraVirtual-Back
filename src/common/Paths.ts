@@ -12,6 +12,7 @@ export default {
   Entities: {
     Base: '/entities',
     Login: '/login',
+    Details: '/details',
     GetOne: '/:cvu',
     GetAll: '/all',
     Add: '/add',

@@ -61,6 +61,12 @@ entityRouter.get(
 );
 
 entityRouter.get(
+  Paths.Entities.Details,
+  checkToken,
+  EntityRoutes.getEntityDetails
+)
+
+entityRouter.get(
   Paths.Entities.GetOne,
   checkToken, 
   EntityRoutes.getEntity

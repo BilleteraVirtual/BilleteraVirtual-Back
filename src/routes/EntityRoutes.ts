@@ -49,6 +49,25 @@ async function loginEntity(req: IReq, res: IRes){
     const token = await EntityService.loginEntity(entity);
     res.status(HttpStatusCodes.OK).json(token);
 }
+
+async function getEntityDetails(req: IReq<{ cvu: string, type: string }>, res: IRes): Promise<void> {
+    const { cvu, type } = req.body; 
+
+    try {
+        const entityDetails = await EntityService.getEntityDetails(cvu, type);
+        if (!entityDetails) {
+            res.status(HttpStatusCodes.NOT_FOUND).json({ message: 'Entity not found' });
+            return;
+        }
+        res.status(HttpStatusCodes.OK).json(entityDetails);
+    } catch (error) {
+        console.error('Error fetching entity details:', error);
+        res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({ 
+            message: 'An error occurred while fetching entity details' 
+        });
+    }
+}
+
 // **** Export default **** //
 
 export default {
@@ -58,4 +77,5 @@ export default {
     updateEntity,
     deleteEntity,
     loginEntity,
+    getEntityDetails,
 } as const;
