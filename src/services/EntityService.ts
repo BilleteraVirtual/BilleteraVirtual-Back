@@ -7,6 +7,8 @@ import CompanyService from './CompanyService';
 import UserService from './UserService';
 import crypto from 'crypto';
 import Category from '@src/models/Category.model';
+import Company from '@src/models/Company.model';
+import User from '@src/models/User.model';
 
 
 // **** Variables **** //
@@ -126,31 +128,57 @@ async function deleteEntity(cvu: number): Promise<void> {
     });
 }
 
-async function loginEntity(entity: any): Promise<void> {
-    const entity1 = await Entity.findOne({
+async function loginEntity(entity: any): Promise<string> {
+    const entityRecord = await Entity.findOne({
         where: { email: entity.email },
     });
 
-    if(!entity1){
+    if (!entityRecord) {
         throw new RouteError(HttpStatusCodes.NOT_FOUND, ENTITY_NOT_FOUND_ERR);
     }
 
-    const pass = bcrypt.compareSync(entity.password, entity1.hash);
+    const isPasswordValid = bcrypt.compareSync(entity.password, entityRecord.hash);
 
-    if (!pass) {
+    if (!isPasswordValid) {
         throw new RouteError(HttpStatusCodes.UNAUTHORIZED, 'Invalid password');
     }
 
-    return createToken(entity1.email);
+    // Determinar el tipo de entidad (usuario o empresa)
+    let type: 'user' | 'company';
+
+    const user = await User.findOne({
+        where: { entityCVU: entityRecord.CVU },
+    });
+
+    if (user) {
+        type = 'user';
+    } else {
+        const company = await Company.findOne({
+            where: { entityCVU: entityRecord.CVU },
+        });
+
+        if (company) {
+            type = 'company';
+        } else {
+            throw new RouteError(HttpStatusCodes.BAD_REQUEST, 'Invalid entity type');
+        }
+    }
+
+    // Crear y devolver token
+    return createToken(entityRecord.email, entityRecord.CVU, type);
 }
 // **** Export default **** //
 
-function createToken(email: string | undefined) { 
-    if (!email) {
-        throw new Error('Email is required to create a token');
-    } 
-    return jwt.sign({ email }, process.env.JWT_SECRET || 'default_secret', { expiresIn: '20s' });
+function createToken(email: string | undefined, cvu: string, type: 'user' | 'company'): string {
+    if (!email || !cvu || !type) {
+        throw new Error('Email, CVU, and type are required to create a token');
+    }
 
+    return jwt.sign(
+        { email, cvu, type },
+        process.env.JWT_SECRET || 'default_secret',
+        { expiresIn: '1d' }
+    );
 }
 
 export default {
