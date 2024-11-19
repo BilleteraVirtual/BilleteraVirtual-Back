@@ -18,6 +18,12 @@ async function getReserve(req: IReq, res: IRes){
     res.status(HttpStatusCodes.OK).json(reserve);
 }
 
+async function getReservesByCVU(req: IReq, res: IRes){
+    const  cvu  = req.params.cvu;
+    const reserves = await ReserveService.getReservesByCVU(cvu);
+    res.status(HttpStatusCodes.OK).json(reserves);
+}
+
 async function addReserve(req: IReq<IReserve>, res: IRes){
     const reserve = req.body;
     await ReserveService.addReserve(reserve);
@@ -42,6 +48,7 @@ async function deleteReserve(req: IReq, res: IRes){
 export default {
     getAllReserves,
     getReserve,
+    getReservesByCVU,
     addReserve,
     updateReserve,
     deleteReserve,

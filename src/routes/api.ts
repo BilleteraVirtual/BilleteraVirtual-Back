@@ -111,9 +111,16 @@ reserveRouter.put(
 );
 
 reserveRouter.delete(
-  Paths.Reserves.Delete, 
+  Paths.Reserves.Delete,
+  checkToken,
   ReserveRoutes.deleteReserve
 );
+
+reserveRouter.get(
+  Paths.Reserves.GetByCVU,
+  checkToken,
+  ReserveRoutes.getReservesByCVU
+)
 
 // Define routes for companies
 
@@ -199,6 +206,12 @@ transactionRouter.delete(
 authRouter.post(
   Paths.Auth.Verify,
   authRoutes.verifyToken
+);
+
+authRouter.get(
+  Paths.Auth.Decode,
+  checkToken,
+  authRoutes.decodeToken
 );
 
 

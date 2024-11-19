@@ -8,6 +8,7 @@ import Entity from './Entity.model';
 export class Reserve extends Model {
   @Column({
     primaryKey: true,
+    autoIncrement: true,
     field: 'reserveId',
     type: DataType.INTEGER,
   })

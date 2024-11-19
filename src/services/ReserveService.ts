@@ -29,6 +29,14 @@ async function getReserve(id: number): Promise<Reserve> {
     });
 }
 
+async function getReservesByCVU(entityCVU: string): Promise<Reserve[]> {
+    return Reserve.findAll({
+        where: { entityCVU },
+    }).then((reserves: Reserve[]) => {
+        return reserves;
+    });
+}
+
 async function addReserve(reserve: IReserve): Promise<void> {
     const { reserveId, reason, amount, entityCVU } = reserve;
     Reserve.create({ reserveId, reason, amount, entityCVU }).then(() => {
@@ -56,6 +64,7 @@ async function deleteReserve(reserveId: number): Promise<void> {
 
 export default {
     getAllReserves,
+    getReservesByCVU,
     getReserve,
     addReserve,
     updateReserve,
