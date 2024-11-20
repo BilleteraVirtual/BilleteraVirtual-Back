@@ -116,6 +116,18 @@ reserveRouter.delete(
   ReserveRoutes.deleteReserve
 );
 
+reserveRouter.put(
+  Paths.Reserves.Deposit,
+  checkToken,
+  ReserveRoutes.depositMoney
+)
+
+reserveRouter.put(
+  Paths.Reserves.Extract,
+  checkToken,
+  ReserveRoutes.extractMoney
+)
+
 reserveRouter.get(
   Paths.Reserves.GetByCVU,
   checkToken,

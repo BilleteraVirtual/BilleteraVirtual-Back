@@ -13,7 +13,7 @@ async function getAllEntities(req: IReq, res: IRes){
     }
 
 async function getEntity(req: IReq, res: IRes){
-    const  cvu  = +req.params.cvu;
+    const  cvu  = req.params.cvu;
     const entity = await EntityService.getEntity(cvu);
     res.status(HttpStatusCodes.OK).json(entity);
 }

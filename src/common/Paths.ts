@@ -49,6 +49,8 @@ export default {
     GetOne: '/:id',
     GetAll: '/all',
     Add: '/add',
+    Extract: '/extract',
+    Deposit: '/deposit',
     Update: '/update/:id',
     Delete: '/delete/:id',
   },

@@ -44,7 +44,7 @@ async function getAllEntities(): Promise<Entity[]> {
     });
 }
 
-async function getEntity(cvu: number): Promise<Entity> {
+async function getEntity(cvu: string): Promise<Entity> {
     return Entity.findOne({
         where: { CVU: cvu },
     }).then((entity: Entity | null) => {

@@ -42,6 +42,18 @@ async function deleteReserve(req: IReq, res: IRes){
     await ReserveService.deleteReserve(id);
     res.status(HttpStatusCodes.NO_CONTENT).send();
 }
+async function depositMoney(req: IReq< { amount: any, reserveId : any, cvu: any }>, res: IRes){
+    const { amount, reserveId, cvu } = req.body;
+    console.log(amount, reserveId, cvu);
+    await ReserveService.depositMoney(cvu, amount, reserveId);
+    res.status(HttpStatusCodes.CREATED).send();
+}
+
+async function extractMoney(req: IReq<{ amount: any, reserveId : any, cvu: any }>, res: IRes){
+    const { amount, reserveId, cvu } = req.body;
+    await ReserveService.extractMoney(cvu, amount, reserveId);
+    res.status(HttpStatusCodes.CREATED).send();
+}
 
 // **** Export default **** //
 
@@ -52,4 +64,6 @@ export default {
     addReserve,
     updateReserve,
     deleteReserve,
+    depositMoney,
+    extractMoney
 } as const;
