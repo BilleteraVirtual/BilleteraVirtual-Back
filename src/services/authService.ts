@@ -18,8 +18,13 @@ async function verifyToken(token: string): Promise<boolean> {
     );
 }
 
+async function decodeToken(token: string): Promise<any> {
+    return jwt.decode(token);
+}
+
 // **** Export default **** //
 
 export default {
-    verifyToken
+    verifyToken,
+    decodeToken
 } as const;

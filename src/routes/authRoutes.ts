@@ -18,10 +18,26 @@ async function verifyToken(req: IReq<string>, res: IRes) {
 
 }
 
+async function decodeToken(req: IReq<string>, res: IRes) {
+    // Extract token from authorization header
+    const authHeader = req.headers['authorization'];
+    if (!authHeader) {
+        return res.status(HttpStatusCodes.UNAUTHORIZED).send({ message: 'Authorization header missing' });
+    }
+    const token = authHeader.split(' ')[1];
+    const result = await authService.decodeToken(token);
+    if(result) {
+        return res.status(HttpStatusCodes.OK).send({ message: 'Token decoded successfully', result });
+    }
+    return res.status(HttpStatusCodes.UNAUTHORIZED).send({ message: 'Invalid token' });
+
+}
+
 
 
 // **** Export default **** //
 
 export default {
-    verifyToken
+    verifyToken,
+    decodeToken
 } as const;

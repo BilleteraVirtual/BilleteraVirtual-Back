@@ -45,9 +45,12 @@ export default {
   },
   Reserves: {
     Base: '/reserves',
+    GetByCVU: '/client/:cvu',
     GetOne: '/:id',
     GetAll: '/all',
     Add: '/add',
+    Extract: '/extract',
+    Deposit: '/deposit',
     Update: '/update/:id',
     Delete: '/delete/:id',
   },
@@ -62,6 +65,7 @@ export default {
   Auth: {
     Base: '/auth',
     Verify: '/verify',
+    Decode: '/decode',
   },
 
 } as const;
