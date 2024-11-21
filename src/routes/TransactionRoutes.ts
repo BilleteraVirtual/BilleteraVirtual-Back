@@ -36,6 +36,13 @@ async function deleteTransaction(req: IReq, res: IRes){
     await TransactionService.deleteTransaction(id);
     res.status(HttpStatusCodes.NO_CONTENT).send();
 }
+
+async function getTransactionsByCVU(req: IReq, res: IRes){
+    const cvu = req.params.cvu;
+    const page = +req.params.page;
+    const transactions = await TransactionService.getTransactionsByCVU(cvu, page);
+    res.status(HttpStatusCodes.OK).json(transactions);
+}
 // **** Export default **** //
 
 export default {
@@ -44,4 +51,5 @@ export default {
     addTransaction,
     updateTransaction,
     deleteTransaction,
+    getTransactionsByCVU
 } as const;
