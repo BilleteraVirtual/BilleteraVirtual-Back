@@ -42,6 +42,7 @@ export default {
     Add: '/add',
     Update: '/update/:id',
     Delete: '/delete/:id',
+    GetByCVU: '/:cvu/:page',
   },
   Reserves: {
     Base: '/reserves',

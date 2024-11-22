@@ -215,6 +215,12 @@ transactionRouter.delete(
   TransactionRoutes.deleteTransaction
 );
 
+transactionRouter.get(
+  Paths.Transactions.GetByCVU,
+  checkToken,
+  TransactionRoutes.getTransactionsByCVU
+)
+
 authRouter.post(
   Paths.Auth.Verify,
   authRoutes.verifyToken

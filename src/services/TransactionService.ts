@@ -3,6 +3,7 @@ import HttpStatusCodes from '@src/common/HttpStatusCodes';
 
 import { ITransaction } from '@src/models/Transaction';
 import Transaction from '@src/models/Transaction.model';
+import { Op } from 'sequelize';
 
 
 // **** Variables **** //
@@ -52,6 +53,21 @@ async function deleteTransaction(transactionId: number): Promise<void> {
         return;
     });
 }
+
+async function getTransactionsByCVU(cvu: string, page: number): Promise<Transaction[]> {
+    const limit = 10;
+    const offset = (page - 1) * limit;
+
+    return await Transaction.findAll({
+      where: {
+        [Op.or]: [{ senderCVU: cvu }, { recipientCVU: cvu }],
+      },
+      limit,
+      offset,
+      order: [['date', 'DESC']], // Ordenar por fecha descendente
+    });
+  }
+
 // **** Export default **** //
 
 export default {
@@ -60,4 +76,5 @@ export default {
     addTransaction,
     updateTransaction,
     deleteTransaction,
+    getTransactionsByCVU
 } as const;
