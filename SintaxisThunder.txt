@@ -1,0 +1,76 @@
+user:
+
+{
+  "DNI": 12345678,
+  "firstName": "John",
+  "lastName": "Smith",
+  "entityCVU": 98765432
+}
+
+transaction:
+
+{
+  "amount": 100.00,
+  "reason": "Payment",
+  "date": "2024-08-31T10:00:00.000Z",
+  "idCategory": 1,
+  "senderCVU": 98765432,
+  "recipientCVU": 87654321
+}
+
+entity:
+
+{
+  "CVU": 12345678,
+  "alias": "sample_alias",
+  "balance": 500.00,
+  "email": "sample@example.com",
+  "password": "1234"
+}
+
+category:
+
+{
+  "idCategory": 1,
+  "tipo": "Expense"
+}
+
+company:
+
+{
+  "idCompany": 1,
+  "businessName": "Tech Solutions",
+  "idCategory": 1,
+  "entityCVU": 12345678
+}
+
+reserve:
+
+{
+  "idReserve": 1,
+  "reason": "Reservation for conference room",
+  "amount": 200.00,
+  "entityCVU": 12345678
+}
+
+
+transaction :
+
+
+  {
+    "transactionId": 3,
+    "amount": 321,
+    "reason": "si",
+    "date": "2025-1-01",
+    "idCategory": 1,
+    "senderCVU": 12345678,
+    "recipientCVU": 12345678
+  }
+
+
+  category:
+
+    {
+    "idCategory": 10,
+    "type":"cosa"
+  }
