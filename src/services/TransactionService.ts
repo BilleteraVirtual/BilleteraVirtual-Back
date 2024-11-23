@@ -4,6 +4,7 @@ import HttpStatusCodes from '@src/common/HttpStatusCodes';
 import { ITransaction } from '@src/models/Transaction';
 import Transaction from '@src/models/Transaction.model';
 import { Op } from 'sequelize';
+import Entity from '@src/models/Entity.model';
 
 
 // **** Variables **** //
@@ -22,6 +23,7 @@ async function getAllTransactions(): Promise<Transaction[]> {
 async function getTransaction(idTransaction: number): Promise<Transaction> {
     return Transaction.findOne({
         where: { transactionId: idTransaction },
+        include: ['category'],
     }).then((transaction: Transaction | null) => {
         if (!transaction) {
             throw new RouteError(HttpStatusCodes.NOT_FOUND, TRANSACTION_NOT_FOUND_ERR);
@@ -30,11 +32,51 @@ async function getTransaction(idTransaction: number): Promise<Transaction> {
     });
 }
 
-async function addTransaction(transaction: ITransaction): Promise<void> {
-    const { transactionId, amount, reason, date, idCategory, senderCVU, recipientCVU } = transaction;
-    Transaction.create({ transactionId, amount, reason, date, idCategory, senderCVU, recipientCVU }).then(() => {
-        return;
+async function addTransaction(transaction: any): Promise<void> {
+    const { amount, reason, date, idCategory, recipientCVU } = transaction;
+  const senderCVU = transaction.cvu;
+
+  try {
+    // Buscar las cuentas del sender y el recipient
+    const sender = await Entity.findOne({ where: { CVU: senderCVU } });
+    const recipient = await Entity.findOne({ where: { CVU: recipientCVU } });
+
+    if (!sender) {
+      throw new Error('La cuenta del remitente no existe.');
+    }
+
+    if (!recipient) {
+        throw new Error('La cuenta del receptor no existe.');
+    }
+
+    if (senderCVU === recipientCVU) {
+        throw new Error('El remitente y el receptor no pueden ser la misma cuenta.');
+    }
+
+    // Verificar si el sender tiene saldo suficiente
+    if (!sender || sender.balance === undefined || sender.balance < amount) {
+        throw new Error('El remitente no tiene suficiente saldo para realizar la transacción.');
+    }
+
+    // Realizar la transacción: descontar del sender y sumar al recipient
+    await sender.update({ balance: sender.balance - amount });
+    await recipient.update({ balance: recipient.balance + amount });
+
+    // Registrar la transacción
+    await Transaction.create({
+      amount,
+      reason,
+      date,
+      idCategory,
+      senderCVU,
+      recipientCVU,
     });
+
+    console.log('Transacción realizada con éxito.');
+  } catch (error) {
+    console.error('Error al realizar la transacción:', error.message);
+    throw error; // Lanzar el error para que el controlador lo maneje
+  }
 }
 
 async function updateTransaction(transaction: ITransaction): Promise<void> {
