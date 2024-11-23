@@ -9,6 +9,7 @@ import crypto from 'crypto';
 import Category from '@src/models/Category.model';
 import Company from '@src/models/Company.model';
 import User from '@src/models/User.model';
+import { Op } from 'sequelize';
 
 
 // **** Variables **** //
@@ -209,6 +210,50 @@ function createToken(email: string | undefined, cvu: string, type: 'user' | 'com
     );
 }
 
+async function searchEntity(query: string) {
+    // Buscar la entidad con alias o CVU y su relación con User y Company
+    const entity = await Entity.findOne({
+      where: {
+        [Op.or]: [{ alias: query }, { CVU: query }],
+      },
+      attributes: ['CVU', 'alias'], // Seleccionar los campos necesarios
+      include: [
+        {
+          model: User,
+          attributes: ['firstName', 'lastName'], // Solo obtener nombre y apellido si es un usuario
+        },
+        {
+          model: Company,
+          attributes: ['businessName'], // Solo obtener nombre de la empresa si es una empresa
+          include: [{ model: Category}], // Obtener el tipo de categoría de la empresa
+        },
+      ],
+    });
+
+    if (!entity) return null;
+
+    // Verificar si es usuario o empresa
+    const result: any = {
+      CVU: entity.CVU,
+      alias: entity.alias,
+    };
+
+    if (entity.user) {
+      result.type = 'user';
+      result.firstName = entity.user.firstName;
+      result.lastName = entity.user.lastName;
+    } else if (entity.company) {
+      result.type = 'company';
+      result.businessName = entity.company.businessName;
+      result.idCategory = entity.company.category?.idCategory || 'No category assigned';
+      result.categoryType = entity.company.category?.type || 'No category assigned';
+    } else {
+      result.type = 'unknown'; // Caso extraño: sin relación con User ni Company
+    }
+    console.log(result)
+    return result;
+  }
+
 export default {
     getAllEntities,
     getEntity,
@@ -217,4 +262,5 @@ export default {
     deleteEntity,
     loginEntity,
     getEntityDetails,
+    searchEntity,
 } as const;

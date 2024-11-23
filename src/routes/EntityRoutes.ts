@@ -68,6 +68,12 @@ async function getEntityDetails(req: IReq<{ cvu: string, type: string }>, res: I
     }
 }
 
+async function searchEntity(req: IReq, res: IRes){
+    const query = req.query?.query?.toString() || ''; // Provide a default value of an empty string if query is undefined
+    const entities = await EntityService.searchEntity(query);
+    res.status(HttpStatusCodes.OK).json(entities);
+}
+
 // **** Export default **** //
 
 export default {
@@ -78,4 +84,5 @@ export default {
     deleteEntity,
     loginEntity,
     getEntityDetails,
+    searchEntity,
 } as const;

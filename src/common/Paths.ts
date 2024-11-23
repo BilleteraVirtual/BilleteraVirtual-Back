@@ -18,6 +18,7 @@ export default {
     Add: '/add',
     Update: '/update/:cvu',
     Delete: '/delete/:cvu',
+    Search: '/search',
   },
   Users: {
     Base: '/users',
@@ -43,6 +44,7 @@ export default {
     Update: '/update/:id',
     Delete: '/delete/:id',
     GetByCVU: '/:cvu/:page',
+    Search: '/search',
   },
   Reserves: {
     Base: '/reserves',

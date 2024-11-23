@@ -34,7 +34,7 @@ export class Transaction extends Model {
   date?: Date;
 
   @ForeignKey(() => Category)
-  @AllowNull(false)
+  @AllowNull(true)
   @Column({
     type: DataType.INTEGER,
     field: 'category_idCategory',

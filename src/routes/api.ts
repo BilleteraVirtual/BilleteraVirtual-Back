@@ -48,7 +48,11 @@ userRouter.delete(
   UserRoutes.deleteUser
 );
 
-
+entityRouter.get(
+  Paths.Entities.Search,
+  checkToken,
+  EntityRoutes.searchEntity
+);
 // Define routes for entities
 entityRouter.post(
   Paths.Entities.Login,
@@ -87,6 +91,8 @@ entityRouter.delete(
   Paths.Entities.Delete, 
   EntityRoutes.deleteEntity
 );
+
+
 
 
 // Define routes for reserves
@@ -192,21 +198,25 @@ categoryRouter.delete(
 
 transactionRouter.get(
   Paths.Transactions.GetAll,
+  checkToken,
   TransactionRoutes.getAllTransactions
 );
 
 transactionRouter.get(
   Paths.Transactions.GetOne,
+  checkToken,
   TransactionRoutes.getTransaction
 );
 
 transactionRouter.post(
   Paths.Transactions.Add,
+  checkToken,
   TransactionRoutes.addTransaction
 );
 
 transactionRouter.put(
   Paths.Transactions.Update,
+  checkToken,
   TransactionRoutes.updateTransaction
 );
 
