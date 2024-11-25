@@ -21,7 +21,7 @@ COPY --from=builder /app/dist ./dist
 COPY ./package*.json ./
 
 # Instalar solo dependencias necesarias para producción
-RUN npm install --only=production
+RUN npm install
 
 # Exponer el puerto
 EXPOSE 8081
