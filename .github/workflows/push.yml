@@ -34,18 +34,6 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - name: Create production.env file
-        run: |
-          mkdir -p app/env
-          echo "APP_ENV=production" > app/env/production.env
-          echo "DB_HOST=${{ secrets.DB_HOST }}" >> app/env/production.env
-          echo "DB_USER=${{ secrets.DB_USER }}" >> app/env/production.env
-          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> app/env/production.env
-          echo "DB_NAME=${{ secrets.DB_NAME }}" >> app/env/production.env
-          echo "DB_PORT=${{ secrets.DB_PORT }}" >> app/env/production.env
-          
-        shell: bash
-
       - name: Build and push Docker image
         id: push
         uses: docker/build-push-action@v2
@@ -54,3 +42,10 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            APP_ENV=production
+            DB_HOST=${{ secrets.DB_HOST }}
+            DB_USER=${{ secrets.DB_USER }}
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+            DB_NAME=${{ secrets.DB_NAME }}
+            DB_PORT=${{ secrets.DB_PORT }}
