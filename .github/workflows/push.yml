@@ -22,9 +22,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Create production.env from secret
-        run: |
-          echo "${{ secrets.PRODUCTION }}" > ./env/production.env 
 
       - name: Login
         uses: docker/login-action@v2
