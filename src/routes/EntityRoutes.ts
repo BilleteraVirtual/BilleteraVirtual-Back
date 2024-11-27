@@ -74,6 +74,13 @@ async function searchEntity(req: IReq, res: IRes){
     res.status(HttpStatusCodes.OK).json(entities);
 }
 
+async function depositMoney(req: IReq <{cvu: string, amount: number}>, res: IRes){
+    const cvu = req.body.cvu;
+    const amount = req.body.amount;
+    await EntityService.depositMoney(cvu, amount);
+    res.status(HttpStatusCodes.CREATED).send();
+}
+
 // **** Export default **** //
 
 export default {
@@ -85,4 +92,5 @@ export default {
     loginEntity,
     getEntityDetails,
     searchEntity,
+    depositMoney
 } as const;

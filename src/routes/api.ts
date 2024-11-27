@@ -92,7 +92,11 @@ entityRouter.delete(
   EntityRoutes.deleteEntity
 );
 
-
+entityRouter.post(
+  Paths.Entities.Deposit,
+  checkToken,
+  EntityRoutes.depositMoney
+);
 
 
 // Define routes for reserves
