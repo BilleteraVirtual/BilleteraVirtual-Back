@@ -19,6 +19,7 @@ export default {
     Update: '/update/:cvu',
     Delete: '/delete/:cvu',
     Search: '/search',
+    Deposit: '/deposit',
   },
   Users: {
     Base: '/users',

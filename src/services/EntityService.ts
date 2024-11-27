@@ -254,6 +254,22 @@ async function searchEntity(query: string) {
     return result;
   }
 
+  async function depositMoney(cvu: string, amount: number): Promise<void> {
+    const entity = await Entity.findOne({
+      where: { CVU: cvu },
+    });
+    if(!entity){
+      throw new RouteError(HttpStatusCodes.NOT_FOUND, ENTITY_NOT_FOUND_ERR);
+    }
+    if (entity.balance !== undefined) {
+        entity.balance += amount;
+    } else {
+        throw new RouteError(HttpStatusCodes.INTERNAL_SERVER_ERROR, 'Entity balance is undefined');
+    }
+    await entity.save();
+    return;
+  }
+
 export default {
     getAllEntities,
     getEntity,
@@ -263,4 +279,5 @@ export default {
     loginEntity,
     getEntityDetails,
     searchEntity,
+    depositMoney
 } as const;
